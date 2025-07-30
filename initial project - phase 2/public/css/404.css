@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2d2d2d;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.not-found-container {
+  max-width: 500px;
+}
+
+.not-found-container h1 {
+  font-size: 8rem;
+  margin-bottom: 1rem;
+  margin-top: auto;
+}
+
+.not-found-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.back-home {
+  padding: 0.6rem 1.2rem;
+  background-color: #8B4513;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
