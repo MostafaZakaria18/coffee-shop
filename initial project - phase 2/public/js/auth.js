@@ -47,4 +47,4 @@ function updateNavbarAuthState() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", updateNavbarAuthState);
+document.addEventListener("DOMContentLoaded", updateNavbarAuthState); 

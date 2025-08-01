@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-
+ 
 // Dummy menu items
 const productsList = [
   { id: 1, name: 'Espresso', price: 3.5, image: '/uploads/espresso.jpg' },
