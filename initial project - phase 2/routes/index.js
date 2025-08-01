@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/contact', (req, res) => res.render('contact', { title: 'Contact' }));
-router.get('/signup', (req, res) => res.render('signup', { title: 'Sign Up' }));
 router.get("/unauth", (req, res) => {
   res.render("unauth"); 
 });
@@ -35,6 +34,8 @@ function ensureAuthenticated(req, res, next) {
 router.get('/unauth', (req, res) => {
   res.render('unauth');
 });
+
+
 
 // Menu page
 router.get('/menu', (req, res) => {
@@ -118,39 +119,6 @@ router.post('/cart/confirm', ensureAuthenticated, (req, res) => {
   req.session.cart = [];
 
   res.status(200).send("Order confirmed");
-});
-
-const dummyUser = {
-  email: "coffee_lover@email.com",
-  password: "espresso123",
-  name: "Mostafa"
-};
-
-router.get('/login', (req, res) => {
-  res.render('logIn');
-});
-
-// POST login form
-router.post('/login', (req, res) => {
-  const { email, password } = req.body;
-
-  if (email === dummyUser.email && password === dummyUser.password) {
-    req.session.user = {
-        name: dummyUser.name,
-        email: dummyUser.email
-    };
-    return res.redirect('/');
-  }
-
-  res.render('logIn',{error:'Invalid credentials'});
-});
-
-// GET logout
-router.get('/logout', (req, res) => {
-  req.session.destroy(err => {
-    if (err) console.error(err);
-    res.redirect('/');
-  });
 });
 
 

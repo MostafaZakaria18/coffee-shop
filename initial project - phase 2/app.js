@@ -2,13 +2,14 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-
+const connectDb = require('./db')
 const app = express();
 const PORT = 5500;
 
 const indexRoutes = require('./routes/index');
+const authRoutes =require('./routes/routeAuth');
 
-
+connectDb();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +33,8 @@ app.use((req, res, next) => {
 
 // Route setup
 app.use('/', indexRoutes);
+app.use('/', authRoutes);
+
 
 app.use((req, res, next) => {
   res.status(404).render("404");
