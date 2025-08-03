@@ -8,6 +8,8 @@ const PORT = 5500;
 
 const indexRoutes = require('./routes/index');
 const authRoutes =require('./routes/routeAuth');
+const { injectUserAndCart } = require('./middleware/auth');
+
 
 connectDb();
 
@@ -23,6 +25,10 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+app.use(injectUserAndCart);
+
+
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;

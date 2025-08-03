@@ -15,8 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (!res.ok) throw new Error(await res.text());
+        
+        const data = await res.json();
 
         showToast(`${name} added to cart!`);
+        updateCartCount(data.totalItems); 
       } catch (err) {
         console.error("item cannot be added to cart:", err.message);
       }
@@ -62,7 +65,29 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  fetch("/cart/count")
+    .then(res => res.json())
+    .then(data => {
+      updateCartCount(data.total || 0); // fallback to 0
+    })
+    .catch(err => {
+      console.error("Failed to load cart count:", err);
+    });
 });
+//update Cart
+function updateCartCount(count) {
+  const countElement  = document.getElementById("cart-count");
+
+   if (!countElement) return;
+
+   if (count > 0) {
+    countElement.textContent = count
+    countElement.style.display = "inline-block";
+   } else {
+    countElement.style.display = "none";
+   }
+}
 
 // Toast Notification 
 function showToast(message) {

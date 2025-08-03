@@ -1,3 +1,5 @@
+const Order = require("../model/order");
+
 exports.viewCart = (req, res) => {
     const cart = req.session.cart|| [];
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -16,8 +18,9 @@ exports.addToCart = (req, res) => {
     } else {
         req.session.cart.push({ name, price: parseFloat(price), quantity: 1 });
     }
+    const totalItems = req.session.cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    res.json({ success: true });
+    res.json({ success: true, totalItems });
 };
 
 exports.removeFromCart = (req, res) => {
@@ -45,18 +48,34 @@ exports.decreaseQuantity = (req, res) => {
   res.sendStatus(200);
 };
 
-exports.confirmOrder = (req, res) => {
+exports.confirmOrder = async (req, res) => {
     const cart = req.session.cart || [];
     if (cart.length === 0) {
         return res.status(400).send("Cart is empty");
     }
     const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const order = {
-        items: cart,
-        total: totalPrice,
-        placedAt: new Date(),
-    };
-    console.log("Order confirmed:", order);
-    req.session.cart = [];
-    res.status(200).send("Order confirmed");
+    try{
+        const newOrder = new Order ({
+            items: cart,
+            total: totalPrice,
+            placedAt: new Date(),
+            user: req.session.userId
+        });
+
+        await newOrder.save();
+
+        console.log("order saved", newOrder);
+        req.session.cart = [];
+        res.status(200).send("Order confirmed");
+    } catch(err) {
+        console.error("Error saving order:", error.message);
+        res.status(500).send("Failed to confirm order");
+    }
 };
+
+exports.getCartCount = (req, res) => {
+  const cart = req.session.cart || [];
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  res.json({ total });
+};
+

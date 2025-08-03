@@ -16,7 +16,10 @@
 
     <% if (user) { %>
       <span class="username">Welcome, <%= user.name %></span>
-      <a href="/cart" class="cart-icon">🛒</a>
+      <div class="cart-wrapper">
+        <a href="/cart" class="cart-icon">🛒</a>
+          <span id ="cart-count" class="cart-count"><%= cart?.length ? cart.reduce((t, i) => t + i.quantity, 0) : 0 %></span>
+      </div>
       <a href="/logout" class="navlo">Logout</a>
     <% } else { %>
       <a href="/login" id="loginBtn" class="nav-link">Login</a>

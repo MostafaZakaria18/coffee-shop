@@ -27,6 +27,7 @@ router.post('/cart/remove', ensureAuthenticated, cartController.removeFromCart);
 router.post('/cart/increase', ensureAuthenticated, cartController.increaseQuantity);
 router.post('/cart/decrease', ensureAuthenticated, cartController.decreaseQuantity);
 router.post('/cart/confirm', ensureAuthenticated, cartController.confirmOrder);
+router.get("/count", ensureAuthenticated, cartController.getCartCount);
 
 
 module.exports = router;

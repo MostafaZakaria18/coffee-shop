@@ -1,7 +1,7 @@
 const product = require('../model/products');
 
 exports.home = (req, res) => res.render('index', { title: 'Home Page'});
-exports.contact  = (req, res) => res.render('contact ', { title: 'Contact'});
+exports.contact  = (req, res) => res.render('contact', { title: 'Contact'});
 exports.unauth = (req, res) => res.render('unauth');
 
 exports.menu = async (req, res) => {
