@@ -64,8 +64,8 @@ function validateForm() {
   if (!password) errors.push("• Password is required.");
   if (!mobile) errors.push("• Mobile number is required.");
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email && !emailPattern.test(email)) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+  if (email && !emailPattern.test(email)) { 
     errors.push("• Email format is invalid.");
   }
 

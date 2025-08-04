@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+    function updateQtyDisplay(name, qty){
+      const id = `qty-${name.replace(/\s+/g, '-')}`;
+      const span = document.getElementById(id);
+      if (span){
+        span.textContent = qty > 0 ? qty : 0;
+      } 
+        
+  }
   // Menu Page
   document.querySelectorAll(".add-to-cart, .add-to-cart-btn").forEach(button => {
     button.addEventListener("click", async () => {
@@ -20,11 +28,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showToast(`${name} added to cart!`);
         updateCartCount(data.totalItems); 
+        updateQtyDisplay(name, data.updatedItemQty); 
       } catch (err) {
         console.error("item cannot be added to cart:", err.message);
       }
     });
   });
+
+
+  document.querySelectorAll(".minus-cart").forEach(button => {
+    button.addEventListener("click", async () => {
+      const name = button.dataset.name;
+
+      if (!name) return;
+
+      try {
+        const res = await fetch("/cart/decrease", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name })
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        const data = await res.json();
+
+        showToast(`${name} removed from cart!`);
+        updateCartCount(data.totalItems);
+        updateQtyDisplay(name, data.updatedItemQty); 
+      } catch (err) {
+        console.error("item cannot be removed from cart:", err.message);
+      }
+    });
+  });
+
 
   //  Cart Page 
   const cartSection = document.querySelector(".cart-section");
@@ -86,6 +123,7 @@ function updateCartCount(count) {
     countElement.style.display = "inline-block";
    } else {
     countElement.style.display = "none";
+
    }
 }
 

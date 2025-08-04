@@ -21,7 +21,11 @@
           <h3><%= item.name %></h3>
           <div class="price">$<%= item.price.toFixed(2) %></div>
           <% if (userLoggedIn) { %>
-            <button class="add-to-cart" data-name="<%= item.name %>" data-price="<%= item.price %>">+</button>
+            <div class="menu-actions">
+              <button class="minus-cart" data-name="<%= item.name %>">-</button>
+              <span class="item-qty" id="qty-<%= item.name.replace(/\s+/g, '-') %>">0</span>
+              <button class="add-to-cart" data-name="<%= item.name %>" data-price="<%= item.price %>">+</button>
+            </div>
           <% } %>
         </div>
       <% }) %>

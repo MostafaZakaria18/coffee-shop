@@ -15,6 +15,24 @@
   <section class="contact">
     <h1 class="heading" id="signupTitle">Welcome Guest</h1>
 
+
+    <% if (error) { %>
+       <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+    <% if (success) { %>
+      <div id="toast" class="toast show">
+      <span><%= success %></span>
+      </div>
+      <script>
+      setTimeout(() => {
+      window.location.href = "/login";
+      }, 2000); 
+      </script>
+    <% } %>
+      <!-- <button id="toast-btn">Go to Login</button> -->
+    
+
+
     <form action="/signup" method="post" id="signupForm">
       <input type="text" id="firstName" name="first_name" placeholder="First Name" required />
       <div id="lastNameContainer">
