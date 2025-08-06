@@ -152,7 +152,7 @@ if (confirmBtn) {
       showToast("Order confirmed!");
 
       setTimeout(() => {
-        window.location.reload();
+        window.location.href = "/";
       }, 2000);
     } catch (err) {
       console.error("Order confirmation failed:", err.message);
