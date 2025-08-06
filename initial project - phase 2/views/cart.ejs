@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Your Cart - Qahwa Café</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/cart.css" />
-</head>
-<body>
-  <%- include('partials/navbar') %>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Cart - Qahwa Café</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/cart.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
 
-  <section class="cart-section">
-    <h1>Your Cart</h1>
-    <% if (cart && cart.length > 0) { 
-         let grandTotal = 0;
-    %>
+    <section class="cart-section">
+      <h1>Your Cart</h1>
+      <% if (cart && cart.length > 0) { let grandTotal = 0; %>
       <table>
         <thead>
           <tr>
@@ -26,53 +27,62 @@
           </tr>
         </thead>
         <tbody>
-          <% cart.forEach(item => {
-               const itemTotal = item.price * item.quantity;
-               grandTotal += itemTotal;
-          %>
-            <tr>
-              <td><%= item.name %></td>
-              <td>$<%= item.price.toFixed(2) %></td>
-              <td>
-                <button class="quantity-btn minus" data-name="<%= item.name %>">-</button>
-                <span class="quantity"><%= item.quantity %></span>
-                <button class="quantity-btn plus" data-name="<%= item.name %>">+</button>
-              </td>
-              <td>$<%= itemTotal.toFixed(2) %></td>
-              <td>
-                <button class="remove-btn" data-name="<%= item.name %>">Remove</button>
-              </td>
-            </tr>
+          <% cart.forEach(item => { const itemTotal = item.price *
+          item.quantity; grandTotal += itemTotal; %>
+          <tr>
+            <td><%= item.name %></td>
+            <td>$<%= item.price.toFixed(2) %></td>
+            <td>
+              <button class="quantity-btn minus" data-name="<%= item.name %>">
+                -
+              </button>
+              <span class="quantity"><%= item.quantity %></span>
+              <button class="quantity-btn plus" data-name="<%= item.name %>">
+                +
+              </button>
+            </td>
+            <td>$<%= itemTotal.toFixed(2) %></td>
+            <td>
+              <button class="remove-btn" data-name="<%= item.name %>">
+                Remove
+              </button>
+            </td>
+          </tr>
           <% }) %>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="3" class="grand-total-label">Grand Total</td>
-            <td colspan="2" class="grand-total-value">$<%= grandTotal.toFixed(2) %></td>
+            <td colspan="2" class="grand-total-value">
+              $<%= grandTotal.toFixed(2) %>
+            </td>
           </tr>
         </tfoot>
       </table>
-        <% if (cart && cart.length > 0) { %>
-            <div class="confirm-order-container">
-            <button id="confirmOrderBtn" onclick="showConfirmationPopup()"  class="confirm-order-btn">Confirm Order</button>
-            </div>
-        <% } %>
-
-    <% } else { %>
+      <% if (cart && cart.length > 0) { %>
+      <div class="confirm-order-container">
+        <button
+          id="confirmOrderBtn"
+          onclick="showConfirmationPopup()"
+          class="confirm-order-btn"
+        >
+          Confirm Order
+        </button>
+      </div>
+      <% } %> <% } else { %>
       <p>Your cart is empty.</p>
-    <% } %>
+      <% } %>
 
-  <div id="confirmationPopup" class="popup hidden">
-    <div class="popup-content">
-      <span class="close-btn" onclick="closePopup()">&times;</span>
-      <h2>Order Confirmed!</h2>
-      <p>Thank you for your purchase. Your coffee will be ready soon!</p>
-    </div>
-  </div>
+      <div id="confirmationPopup" class="popup hidden">
+        <div class="popup-content">
+          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <h2>Order Confirmed!</h2>
+          <p>Thank you for your purchase. Your coffee will be ready soon!</p>
+        </div>
+      </div>
+    </section>
 
-  </section>
-
-<%- include('partials/footer') %>
-</body>
+    <%- include('partials/footer') %>
+  </body>
 </html>
 <script src="/js/cart.js"></script>

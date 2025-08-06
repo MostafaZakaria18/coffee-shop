@@ -58,20 +58,23 @@ function validateForm() {
   // Validation rules
   if (!firstName) errors.push("• First name is required.");
   if (!lastName) errors.push("• Last name is required.");
-  
+
   if (!gender) errors.push("• Please select a gender.");
   if (!email) errors.push("• Email is required.");
   if (!password) errors.push("• Password is required.");
   if (!mobile) errors.push("• Mobile number is required.");
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-  if (email && !emailPattern.test(email)) { 
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email && !emailPattern.test(email)) {
     errors.push("• Email format is invalid.");
   }
 
-  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
+  const passwordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
   if (password && !passwordPattern.test(password)) {
-    errors.push("• Password must include uppercase, lowercase, number, symbol, and be at least 8 characters.");
+    errors.push(
+      "• Password must include uppercase, lowercase, number, symbol, and be at least 8 characters."
+    );
   }
 
   if (mobile && !/^\d{11}$/.test(mobile)) {

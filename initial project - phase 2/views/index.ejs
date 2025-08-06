@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Qahwa Café - Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css" />
-  <script defer src="/css/style.css"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Qahwa Café - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="/css/style.css"></script>
+  </head>
 
-<body>
-<%- include('partials/navbar') %>
+  <body>
+    <%- include('partials/navbar') %>
 
-  <!-- <header class="header">
+    <!-- <header class="header">
     <div class="logo">Qahwa Café</div>
     <nav class="navbar">
       <a href="#" class="active">Home</a>
@@ -21,29 +24,49 @@
     </nav>
   </header> -->
 
-  <section class="home">
-    <video autoplay muted loop playsinline class="bg-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
-      <source src="/uploads/coffee-background.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
+    <section class="home">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="bg-video"
+        style="
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -1;
+        "
+      >
+        <source src="/uploads/coffee-background.mp4" type="video/mp4" />
+        Your browser does not support HTML5 video.
+      </video>
 
-    <div class="content">
-  <h3>Where Taste Meets Soul</h3>
-  <p>Savor the bold aroma and warm elegance of your perfect cup.</p>
+      <div class="content">
+        <h3>Where Taste Meets Soul</h3>
+        <p>Savor the bold aroma and warm elegance of your perfect cup.</p>
 
-  <div class="button-group">
-    <a href="/menu" class="btn">Explore Menu</a>
-    <a href="/uploads/coffee-process-animation.mp4" target="_blank" class="btn">Coffee Process Animation</a>
-    <% if (!user) { %>
-      <a href="/signup" class="btn">Sign Up</a>
-    <% } %>  </div>
-  </div>
-  </section>
+        <div class="button-group">
+          <a href="/menu" class="btn">Explore Menu</a>
+          <a
+            href="/uploads/coffee-process-animation.mp4"
+            target="_blank"
+            class="btn"
+            >Coffee Process Animation</a
+          >
+          <% if (!user) { %>
+          <a href="/signup" class="btn">Sign Up</a>
+          <% } %>
+        </div>
+      </div>
+    </section>
 
-  <!-- <footer class="footer">
+    <!-- <footer class="footer">
     <p>&copy; 2025 Qahwa Café — Brewed with Passion in Cairo</p>
   </footer> -->
-  <%- include('partials/footer') %>
-
-</body>
+    <%- include('partials/footer') %>
+  </body>
 </html>

@@ -1,9 +1,9 @@
-function ensureAuthenticated (req, res, next)  {
+function ensureAuthenticated(req, res, next) {
   if (req.session && req.session.user) {
     return next();
   }
-  return res.redirect('/unauth');
-};
+  return res.redirect("/unauth");
+}
 
 function injectUserAndCart(req, res, next) {
   const cart = req.session.cart || [];
@@ -15,5 +15,5 @@ function injectUserAndCart(req, res, next) {
 
 module.exports = {
   injectUserAndCart,
-  ensureAuthenticated
+  ensureAuthenticated,
 };

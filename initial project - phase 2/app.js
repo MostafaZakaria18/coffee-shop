@@ -1,34 +1,33 @@
-const express = require('express');
-const path = require('path');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const connectDb = require('./db')
+const express = require("express");
+const path = require("path");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const connectDb = require("./db");
 const app = express();
 const PORT = 5500;
 
-const indexRoutes = require('./routes/index');
-const authRoutes =require('./routes/routeAuth');
-const { injectUserAndCart } = require('./middleware/auth');
-
+const indexRoutes = require("./routes/index");
+const authRoutes = require("./routes/routeAuth");
+const { injectUserAndCart } = require("./middleware/auth");
 
 connectDb();
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(injectUserAndCart);
-
-
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
@@ -38,9 +37,8 @@ app.use((req, res, next) => {
 });
 
 // Route setup
-app.use('/', indexRoutes);
-app.use('/', authRoutes);
-
+app.use("/", indexRoutes);
+app.use("/", authRoutes);
 
 app.use((req, res, next) => {
   res.status(404).render("404");
@@ -50,4 +48,3 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server running: http://localhost:${PORT}`);
 });
- 

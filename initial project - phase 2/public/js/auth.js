@@ -1,8 +1,7 @@
-
 const dummyUser = {
   email: "coffee_lover@email.com",
   password: "espresso123",
-  name: "Mostafa"
+  name: "Mostafa",
 };
 
 function isUserLoggedIn() {
@@ -47,4 +46,4 @@ function updateNavbarAuthState() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", updateNavbarAuthState); 
+document.addEventListener("DOMContentLoaded", updateNavbarAuthState);

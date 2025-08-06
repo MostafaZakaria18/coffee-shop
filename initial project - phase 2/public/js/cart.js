@@ -1,42 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-    function updateQtyDisplay(name, qty){
-      const id = `qty-${name.replace(/\s+/g, '-')}`;
-      const span = document.getElementById(id);
-      if (span){
-        span.textContent = qty > 0 ? qty : 0;
-      } 
-        
+  function updateQtyDisplay(name, qty) {
+    const id = `qty-${name.replace(/\s+/g, "-")}`;
+    const span = document.getElementById(id);
+    if (span) {
+      span.textContent = qty > 0 ? qty : 0;
+    }
   }
   // Menu Page
-  document.querySelectorAll(".add-to-cart, .add-to-cart-btn").forEach(button => {
-    button.addEventListener("click", async () => {
-      const name = button.dataset.name;
-      const price = parseFloat(button.dataset.price);
+  document
+    .querySelectorAll(".add-to-cart, .add-to-cart-btn")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const name = button.dataset.name;
+        const price = parseFloat(button.dataset.price);
 
-      if (!name || isNaN(price)) return;
+        if (!name || isNaN(price)) return;
 
-      try {
-        const res = await fetch("/cart/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, price })
-        });
+        try {
+          const res = await fetch("/cart/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, price }),
+          });
 
-        if (!res.ok) throw new Error(await res.text());
-        
-        const data = await res.json();
+          if (!res.ok) throw new Error(await res.text());
 
-        showToast(`${name} added to cart!`);
-        updateCartCount(data.totalItems); 
-        updateQtyDisplay(name, data.updatedItemQty); 
-      } catch (err) {
-        console.error("item cannot be added to cart:", err.message);
-      }
+          const data = await res.json();
+
+          showToast(`${name} added to cart!`);
+          updateCartCount(data.totalItems);
+          updateQtyDisplay(name, data.updatedItemQty);
+        } catch (err) {
+          console.error("item cannot be added to cart:", err.message);
+        }
+      });
     });
-  });
 
-
-  document.querySelectorAll(".minus-cart").forEach(button => {
+  document.querySelectorAll(".minus-cart").forEach((button) => {
     button.addEventListener("click", async () => {
       const name = button.dataset.name;
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const res = await fetch("/cart/decrease", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name })
+          body: JSON.stringify({ name }),
         });
 
         if (!res.ok) throw new Error(await res.text());
@@ -55,18 +55,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showToast(`${name} removed from cart!`);
         updateCartCount(data.totalItems);
-        updateQtyDisplay(name, data.updatedItemQty); 
+        updateQtyDisplay(name, data.updatedItemQty);
       } catch (err) {
         console.error("item cannot be removed from cart:", err.message);
       }
     });
   });
 
-
-  //  Cart Page 
+  //  Cart Page
   const cartSection = document.querySelector(".cart-section");
   if (cartSection) {
-    document.querySelectorAll(".plus").forEach(btn => {
+    document.querySelectorAll(".plus").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const name = btn.getAttribute("data-name");
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document.querySelectorAll(".minus").forEach(btn => {
+    document.querySelectorAll(".minus").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const name = btn.getAttribute("data-name");
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document.querySelectorAll(".remove-btn").forEach(btn => {
+    document.querySelectorAll(".remove-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const name = btn.getAttribute("data-name");
@@ -104,30 +103,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   fetch("/cart/count")
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       updateCartCount(data.total || 0); // fallback to 0
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("Failed to load cart count:", err);
     });
 });
 //update Cart
 function updateCartCount(count) {
-  const countElement  = document.getElementById("cart-count");
+  const countElement = document.getElementById("cart-count");
 
-   if (!countElement) return;
+  if (!countElement) return;
 
-   if (count > 0) {
-    countElement.textContent = count
+  if (count > 0) {
+    countElement.textContent = count;
     countElement.style.display = "inline-block";
-   } else {
+  } else {
     countElement.style.display = "none";
-
-   }
+  }
 }
 
-// Toast Notification 
+// Toast Notification
 function showToast(message) {
   const toast = document.getElementById("toast");
   if (!toast) return;
@@ -139,7 +137,7 @@ function showToast(message) {
     toast.classList.remove("show");
   }, 2500);
 }
-// Confirm Order  
+// Confirm Order
 const confirmBtn = document.getElementById("confirmOrderBtn");
 if (confirmBtn) {
   confirmBtn.addEventListener("click", async () => {
@@ -154,7 +152,7 @@ if (confirmBtn) {
       showToast("Order confirmed!");
 
       setTimeout(() => {
-        window.location.reload(); 
+        window.location.reload();
       }, 2000);
     } catch (err) {
       console.error("Order confirmation failed:", err.message);
@@ -162,11 +160,11 @@ if (confirmBtn) {
   });
 }
 
-// PopUps 
+// PopUps
 function showConfirmationPopup() {
-  document.getElementById('confirmationPopup').classList.remove('hidden');
+  document.getElementById("confirmationPopup").classList.remove("hidden");
 }
 
 function closePopup() {
-  document.getElementById('confirmationPopup').classList.add('hidden');
+  document.getElementById("confirmationPopup").classList.add("hidden");
 }

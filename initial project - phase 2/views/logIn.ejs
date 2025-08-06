@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Qahwa Café</title>
-  <link rel="stylesheet" href="/css/login.css" />
-  <link rel="stylesheet" href="/css/style.css" /> 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <%- include('partials/navbar') %>
-    <% if (typeof error !== 'undefined') { %>
-  <div id="error-popup" class="popup">
-    <div class="popup-content">
-      <p><%= error %></p>
-      <button onclick="document.getElementById('error-popup').style.display='none'">OK</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Qahwa Café</title>
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <%- include('partials/navbar') %> <% if (typeof error !== 'undefined') { %>
+    <div id="error-popup" class="popup">
+      <div class="popup-content">
+        <p><%= error %></p>
+        <button
+          onclick="document.getElementById('error-popup').style.display='none'"
+        >
+          OK
+        </button>
+      </div>
     </div>
-  </div>
-<% } %>
+    <% } %>
 
-  <div class="login-container">
-    <h1>Login to Qahwa Café</h1>
-    <form action="/login" method="POST" class="login-form">
-      <input type="text" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Log In</button>
-    </form>
-  </div>
+    <div class="login-container">
+      <h1>Login to Qahwa Café</h1>
+      <form action="/login" method="POST" class="login-form">
+        <input type="text" name="email" placeholder="Email" required />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Log In</button>
+      </form>
+    </div>
 
-  <%- include('partials/footer') %>
-
-</body>
+    <%- include('partials/footer') %>
+  </body>
 </html>
