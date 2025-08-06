@@ -9,20 +9,44 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <script defer src="/css/style.css"></script>
   </head>
 
   <body>
     <%- include('partials/navbar') %>
 
-    <!-- <header class="header">
-    <div class="logo">Qahwa Café</div>
-    <nav class="navbar">
-      <a href="#" class="active">Home</a>
-      <a href="../views/menu.html">Menu</a>
-      <a href="../views/contact.html">Contact</a>
-    </nav>
-  </header> -->
+    <div id="hamburger-container" style="position: relative; display: none">
+      <button
+        id="hamburger-btn"
+        style="background: none; border: none; cursor: pointer; font-size: 24px"
+      >
+        ☰
+      </button>
+
+      <div
+        id="hamburger-menu"
+        class="hidden"
+        style="
+          position: absolute;
+          right: 0;
+          top: 40px;
+          background: white;
+          border: 1px solid #ccc;
+          padding: 10px;
+          border-radius: 5px;
+        "
+      >
+        <a href="/settings" style="display: block; padding: 5px 10px"
+          >Settings</a
+        >
+        <a href="/history" style="display: block; padding: 5px 10px">History</a>
+        <a
+          href="/logout"
+          id="logout-link"
+          style="display: block; padding: 5px 10px"
+          >Logout</a
+        >
+      </div>
+    </div>
 
     <section class="home">
       <video
@@ -64,9 +88,8 @@
       </div>
     </section>
 
-    <!-- <footer class="footer">
-    <p>&copy; 2025 Qahwa Café — Brewed with Passion in Cairo</p>
-  </footer> -->
     <%- include('partials/footer') %>
+
+    <script src="/js/auth.js"></script>
   </body>
 </html>

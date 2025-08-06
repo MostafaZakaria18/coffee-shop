@@ -12,6 +12,19 @@
   </head>
   <header class="header">
     <div class="logo">Qahwa Café</div>
+
+    <% if (user) { %>
+    <!-- Hamburger Menu -->
+    <div id="hamburger-container" class="hamburger-container">
+      <button id="hamburger-btn" class="hamburger-btn">☰</button>
+      <div id="hamburger-menu" class="hamburger-menu hidden">
+        <a href="/settings">Settings</a>
+        <a href="/history">History</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </div>
+    <% } %>
+
     <nav class="navbar">
       <a href="/" class="active">Home</a>
       <a href="/menu">Menu</a>
@@ -19,14 +32,12 @@
 
       <% if (user) { %>
       <span class="username">Welcome, <%= user.name %></span>
-      <div class="cart-wrapper">
+      <div class="cart-wrapper" id="cart-area">
         <a href="/cart" class="cart-icon">🛒</a>
-        <span id="cart-count" class="cart-count"
-          ><%= cart?.length ? cart.reduce((t, i) => t + i.quantity, 0) : 0
-          %></span
-        >
+        <span id="cart-count" class="cart-count">
+          <%= cart?.length ? cart.reduce((t, i) => t + i.quantity, 0) : 0 %>
+        </span>
       </div>
-      <a href="/logout" class="navlo">Logout</a>
       <% } else { %>
       <a href="/login" id="loginBtn" class="nav-link">Login</a>
       <% } %>
