@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("/cart/count")
     .then((res) => res.json())
     .then((data) => {
-      updateCartCount(data.total || 0); // fallback to 0
+      updateCartCount(data.total || 0); 
     })
     .catch((err) => {
       console.error("Failed to load cart count:", err);
