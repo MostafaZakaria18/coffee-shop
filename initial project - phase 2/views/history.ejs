@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order History - Qahwa Café</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/history.css" />
+  </head>
+  <body class="<%= userTheme === 'dark' ? 'dark-theme' : '' %>">
+    <%- include('partials/navbar') %>
+
+    <section class="history-section">
+      <div class="container">
+        <h1>Order History</h1>
+
+        <% if (orders && orders.length > 0) { %>
+        <div class="orders-container">
+          <% orders.forEach(function(order, index) { %>
+          <div class="order-card">
+            <div class="order-header" data-index="<%= index %>">
+              <div class="order-info">
+                <h3>Order #<%= order._id.toString().slice(-6) %></h3>
+                <p class="order-date">
+                  <% var orderDate = new Date(order.placedAt); var dateOptions =
+                  { weekday: 'long', year: 'numeric', month: 'long', day:
+                  'numeric' }; var timeOptions = { hour: '2-digit', minute:
+                  '2-digit' }; %> <%= orderDate.toLocaleDateString('en-US',
+                  dateOptions) %> at <%= orderDate.toLocaleTimeString('en-US',
+                  timeOptions) %>
+                </p>
+              </div>
+              <div class="order-summary">
+                <span class="total">$<%= order.total.toFixed(2) %></span>
+                <span class="toggle-icon" id="toggle-<%= index %>">▼</span>
+              </div>
+            </div>
+
+            <div class="order-details" id="details-<%= index %>">
+              <div class="items-list">
+                <% order.items.forEach(function(item) { %>
+                <div class="item-row">
+                  <span class="item-name"><%= item.name %></span>
+                  <span class="item-quantity">x<%= item.quantity %></span>
+                  <span class="item-price"
+                    >$<%= (item.price * item.quantity).toFixed(2) %></span
+                  >
+                </div>
+                <% }); %>
+              </div>
+              <div class="order-total">
+                <strong>Total: $<%= order.total.toFixed(2) %></strong>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } else { %>
+        <div class="no-orders">
+          <div class="no-orders-content">
+            <h2>No Orders Yet</h2>
+            <p>
+              You haven't placed any orders yet. Start browsing our delicious
+              menu!
+            </p>
+            <a href="/menu" class="browse-menu-btn">Browse Menu</a>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/history.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

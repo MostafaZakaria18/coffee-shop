@@ -27,6 +27,15 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
   },
+  theme: {
+    type: String,
+    enum: ['light', 'dark'],
+    default: 'light'
+  },
+  notifications: {
+    type: Boolean,
+    default: true
+  },
   mobile_number: {
     type: String,
     required: true,

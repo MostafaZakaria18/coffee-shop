@@ -12,30 +12,27 @@ function setupSignupForm() {
 
   // Prevent default form submition
   signupForm.addEventListener("submit", function (e) {
-    e.preventDefault(); //prevent reload
-    validateForm();
+    const valid = validateForm();
+    if (!valid){
+      e.preventDefault();
+    }
   });
 
   // Reset button
   signupForm.addEventListener("reset", function () {
-    const lastNameContainer = document.getElementById("lastNameContainer");
+    // const lastNameContainer = document.getElementById("lastNameContainer");
     const errorDiv = document.getElementById("errorMessages");
     const welcome = document.getElementById("signupTitle");
 
-    if (lastNameContainer) lastNameContainer.style.display = "block";
+    // if (lastNameContainer) lastNameContainer.style.display = "block";
 
-    // Disable and grey out Logged In button
-    if (loggedInBtn) {
-      loggedInBtn.disabled = true;
-      loggedInBtn.classList.remove("enabled");
-    }
 
     // Clear errors and reset welcome
     errorDiv.innerHTML = "";
     welcome.textContent = "Welcome Guest";
   });
 
-  hideLastNameBtn.addEventListener("click", hideLastName);
+  //hideLastNameBtn.addEventListener("click", hideLastName);
 
   loggedInBtn.addEventListener("click", goToHome);
 }
@@ -91,18 +88,19 @@ function validateForm() {
   const welcome = document.getElementById("signupTitle");
   if (welcome) welcome.textContent = `Welcome ${firstName}`;
 
-  alert("Sign up successful!");
+  // alert("Sign up successful!");
 
-  if (loggedInBtn) {
-    loggedInBtn.disabled = false;
-    loggedInBtn.classList.add("enabled");
-  }
+  // if (loggedInBtn) {
+  //   loggedInBtn.disabled = false;
+  //   loggedInBtn.classList.add("enabled");
+  // }
+  return true;
 }
 
-function hideLastName() {
-  const container = document.getElementById("lastNameContainer");
-  if (container) container.style.display = "none";
-}
+// function hideLastName() {
+//   const container = document.getElementById("lastNameContainer");
+//   if (container) container.style.display = "none";
+// }
 
 function goToHome() {
   window.location.href = "../html/index.html";

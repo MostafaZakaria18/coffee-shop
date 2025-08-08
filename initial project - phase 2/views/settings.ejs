@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Qahwa Café</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/settings.css" />
+  </head>
+  <body class="<%= user.theme === 'dark' ? 'dark-theme' : '' %>">
+    <%- include('partials/navbar') %>
+
+    <section class="settings-section">
+      <div class="container">
+        <h1>Account Settings</h1>
+
+        <!-- Success/Error Messages -->
+        <% if (success) { %>
+        <div class="alert alert-success"><%= success %></div>
+        <% } %> <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+        <% } %>
+
+        <div class="settings-grid">
+          <!-- Phone Number Section -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h3>📱 Phone Number</h3>
+            </div>
+            <form class="settings-form" id="phoneForm">
+              <div class="form-group">
+                <label for="mobile_number">Mobile Number</label>
+                <input
+                  type="tel"
+                  id="mobile_number"
+                  name="mobile_number"
+                  value="<%= user.mobile_number %>"
+                  placeholder="01XXXXXXXXX"
+                  required
+                />
+                <small>Egyptian mobile format: 01XXXXXXXXX</small>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Update Phone
+              </button>
+            </form>
+          </div>
+
+          <!-- Password Section -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h3>🔒 Password</h3>
+            </div>
+            <form
+              class="settings-form"
+              action="/settings/update-password"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input
+                  type="password"
+                  id="currentPassword"
+                  name="currentPassword"
+                  placeholder="Enter current password"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  name="newPassword"
+                  placeholder="Enter new password"
+                  required
+                />
+                <small
+                  >Must include uppercase, lowercase, number, and symbol (8+
+                  chars)</small
+                >
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Confirm new password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Update Password
+              </button>
+            </form>
+          </div>
+
+          <!-- Theme Section -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h3>🌙 Theme</h3>
+            </div>
+            <div class="settings-form">
+              <div class="form-group">
+                <label>Choose your preferred theme</label>
+                <div class="theme-selector">
+                  <div
+                    class="theme-option <%= user.theme === 'light' ? 'active' : '' %>"
+                    data-theme="light"
+                  >
+                    <div class="theme-preview light-preview">
+                      <div class="preview-header"></div>
+                      <div class="preview-content"></div>
+                    </div>
+                    <span>Light Mode</span>
+                  </div>
+                  <div
+                    class="theme-option <%= user.theme === 'dark' ? 'active' : '' %>"
+                    data-theme="dark"
+                  >
+                    <div class="theme-preview dark-preview">
+                      <div class="preview-header"></div>
+                      <div class="preview-content"></div>
+                    </div>
+                    <span>Dark Mode</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notifications Section -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h3>🔔 Notifications</h3>
+            </div>
+            <div class="settings-form">
+              <div class="form-group">
+                <div class="toggle-group">
+                  <label for="notifications">Email Notifications</label>
+                  <div class="toggle-switch">
+                    <label>
+                    <input type="checkbox" id="notifications" <%=
+                    user.notifications ? 'checked' : '' %> >
+                    <span class="slider"></span>
+                  </div>
+                  </label>
+                </div>
+                <small
+                  >Receive email notifications about your orders and
+                  promotions</small
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Info Section -->
+          <div class="settings-card">
+            <div class="card-header">
+              <h3>👤 Account Information</h3>
+            </div>
+            <div class="account-info">
+              <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span class="info-value"
+                  ><%= user.first_name %> <%= user.last_name %></span
+                >
+              </div>
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value"><%= user.email %></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Member Since:</span>
+                <span class="info-value">
+                  <%= new Date(user.createdAt).toLocaleDateString('en-US', {
+                  year: 'numeric', month: 'long', day: 'numeric' }) %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/js/settings.js"></script>
+    <script src="/js/auth.js"></script>
+
+  </body>
+</html>

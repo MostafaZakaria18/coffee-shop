@@ -5,14 +5,18 @@ const bodyParser = require("body-parser");
 const connectDb = require("./db");
 const app = express();
 const PORT = 5500;
+
+
 const fs = require("fs");
 const https = require("https");
-const http = require("http");
-const Http_port = 50;
+
 
 const indexRoutes = require("./routes/index");
 const authRoutes = require("./routes/routeAuth");
-const { injectUserAndCart } = require("./middleware/auth");
+const historyRoutes = require('./routes/routehistory');
+const settingsRoutes = require('./routes/routeSettings');
+const { injectUserAndCart } = require('./middleware/auth');
+const { injectTheme } = require('./middleware/theme');
 
 connectDb();
 
@@ -37,6 +41,7 @@ app.use(
 );
 
 app.use(injectUserAndCart);
+app.use(injectTheme);
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
@@ -48,6 +53,8 @@ app.use((req, res, next) => {
 // Route setup
 app.use("/", indexRoutes);
 app.use("/", authRoutes);
+app.use('/history', historyRoutes);
+app.use('/settings', settingsRoutes);
 
 app.use((req, res, next) => {
   res.status(404).render("404");
