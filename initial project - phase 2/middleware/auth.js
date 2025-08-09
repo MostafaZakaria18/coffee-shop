@@ -13,7 +13,26 @@ function injectUserAndCart(req, res, next) {
   next();
 }
 
+function isLoggedIn(req, res, next) {
+  if (req.session && req.session.user) {
+    return next();
+  }
+  res.redirect("/login");
+}
+
+function isAdmin(req, res, next) {
+  if (req.session && req.session.user && req.session.user.isAdmin) {
+    return next();
+  }
+  res.status(403).render("error", {
+    title: "Access Denied",
+    message: "You do not have permission to access this page.",
+  });
+}
+
 module.exports = {
   injectUserAndCart,
   ensureAuthenticated,
+  isAdmin,
+  isLoggedIn
 };

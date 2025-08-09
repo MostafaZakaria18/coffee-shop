@@ -105,6 +105,10 @@ exports.login = async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
     };
+
+    if (user.isAdmin){
+      return res.redirect('/admin')
+    }
     res.redirect("/");
   } catch (err) {
     console.error(err);

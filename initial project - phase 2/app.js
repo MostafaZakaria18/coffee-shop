@@ -15,6 +15,7 @@ const indexRoutes = require("./routes/index");
 const authRoutes = require("./routes/routeAuth");
 const historyRoutes = require('./routes/routehistory');
 const settingsRoutes = require('./routes/routeSettings');
+const adminRoutes = require("./routes/routeAdmin");
 const { injectUserAndCart } = require('./middleware/auth');
 const { injectTheme } = require('./middleware/theme');
 
@@ -55,6 +56,7 @@ app.use("/", indexRoutes);
 app.use("/", authRoutes);
 app.use('/history', historyRoutes);
 app.use('/settings', settingsRoutes);
+app.use('/admin', adminRoutes);
 
 app.use((req, res, next) => {
   res.status(404).render("404");

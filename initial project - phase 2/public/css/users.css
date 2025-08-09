@@ -1,0 +1,55 @@
+body {
+  background-color: #4e342e;
+  color: #fffde7;
+  font-family: "Poppins", sans-serif;
+}
+
+.users-container {
+  max-width: 1000px;
+  margin: 5rem auto;
+  background: #5d4037;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.users-container h1 {
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #6d4c41;
+}
+
+thead {
+  background-color: #3e2723;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #795548;
+}
+
+th {
+  font-weight: bold;
+  color: #fffde7;
+}
+
+.delete-btn {
+  background-color: #b71c1c;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #a11919;
+}

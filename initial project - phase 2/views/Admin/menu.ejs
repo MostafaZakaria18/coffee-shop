@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Menu Management</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/AdminDash.css" />
+  </head>
+  <body>
+    <%- include('../partials/sidebar') %>
+
+    <section id="content">
+      <h1>Menu Management</h1>
+
+      <a href="/admin/menu/add" class="btn btn-primary">Add New Product</a>
+
+      <% if (products.length === 0) { %>
+      <p>No products found.</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+          <tr>
+            <td>
+              <img
+                src="<%= product.image %>"
+                alt="<%= product.name %>"
+                style="width: 100px; height: auto"
+              />
+            </td>
+            <td><%= product.name %></td>
+            <td>$<%= product.price.toFixed(2) %></td>
+            <td>
+              <a href="/admin/menu/edit/<%= product._id %>">Edit</a> |
+              <a
+                href="/admin/menu/delete/<%= product._id %>"
+                onclick="return confirm('Are you sure?');"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </section>
+    <%- include('../partials/footer') %>
+  </body>
+</html>

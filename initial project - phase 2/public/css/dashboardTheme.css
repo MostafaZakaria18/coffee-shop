@@ -1,0 +1,94 @@
+
+body {
+  background-color: #4e342e; 
+  color: #fffde7; 
+}
+
+.head-title h1,
+.head-title .breadcrumb a,
+.head-title .breadcrumb li {
+  color: #fffde7;
+}
+
+.breadcrumb i {
+  color: #d7ccc8;
+}
+
+.box-info li {
+  background-color: #5d4037;
+  border-radius: 12px;
+  color: #fffde7;
+}
+
+.box-info li i {
+  color: #d7ccc8;
+}
+
+.box-info li h3 {
+  color: #fffde7;
+}
+
+.box-info li p {
+  color: #d7ccc8;
+}
+
+.table-data .order table {
+  background-color: #6d4c41;
+  border-collapse: collapse;
+}
+
+.table-data .order thead {
+  background-color: #3e2723;
+}
+
+.table-data .order th {
+  color: #fffde7;
+  border-bottom: 1px solid #795548;
+}
+
+.table-data .order td {
+  border-bottom: 1px solid #795548;
+  color: #fffde7;
+}
+
+.table-data .order .head i {
+  color: #d7ccc8;
+}
+
+.table-data .todo {
+  background-color: #5d4037;
+  border-radius: 12px;
+  color: #fffde7;
+}
+
+.btn-download {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-download:hover {
+  background-color: #45a049;
+}
+.sidebar {
+  background-color: #3e2723; 
+  color: #fffde7; 
+}
+
+.sidebar a {
+  color: #fffde7;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar a:hover {
+  background-color: #5d4037; 
+  color: #d7ccc8; 
+}
+
+.sidebar .active {
+  background-color: #6d4c41;
+  color: #fffde7;
+}
+
+.sidebar i {
+  color: #d7ccc8; 
+}

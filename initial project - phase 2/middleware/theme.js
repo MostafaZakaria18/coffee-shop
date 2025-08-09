@@ -1,10 +1,9 @@
 const User = require("../model/user");
 
 async function injectTheme(req, res, next) {
-  let userTheme = "light"; // default theme
+  let userTheme = "light";
 
   try {
-    // If user is logged in, get their theme preference
     if (req.session && req.session.user && req.session.user.id) {
       const user = await User.findById(req.session.user.id);
       if (user && user.theme) {
@@ -12,7 +11,6 @@ async function injectTheme(req, res, next) {
       }
     }
 
-    // Make theme available to all templates
     res.locals.userTheme = userTheme;
     next();
   } catch (error) {
