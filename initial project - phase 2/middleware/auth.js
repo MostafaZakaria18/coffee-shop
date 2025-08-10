@@ -24,15 +24,19 @@ function isAdmin(req, res, next) {
   if (req.session && req.session.user && req.session.user.isAdmin) {
     return next();
   }
-  res.status(403).render("error", {
-    title: "Access Denied",
-    message: "You do not have permission to access this page.",
-  });
+  res.redirect('/unauth')
+}
+function isUser (req, res, next){
+  if (req.session?.user && !req.session.user.isAdmin){
+    return next();
+  }
+  return res.redirect('/unauth');
 }
 
 module.exports = {
   injectUserAndCart,
   ensureAuthenticated,
   isAdmin,
-  isLoggedIn
+  isLoggedIn,
+  isUser,
 };

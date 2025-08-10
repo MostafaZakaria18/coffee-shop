@@ -85,7 +85,7 @@ exports.confirmOrder = async (req, res) => {
       items: cart,
       total: totalPrice,
       placedAt: new Date(),
-      user: req.session.userId,
+      user: req.session.user.id,
     });
 
     await newOrder.save();
@@ -94,7 +94,7 @@ exports.confirmOrder = async (req, res) => {
     req.session.cart = [];
     res.status(200).send("Order confirmed");
   } catch (err) {
-    console.error("Error saving order:", error.message);
+    console.error("Error saving order:", err.message);
     res.status(500).send("Failed to confirm order");
   }
 };

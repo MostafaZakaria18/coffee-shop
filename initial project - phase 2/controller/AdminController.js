@@ -1,11 +1,26 @@
 const Product = require("../model/products");
 const User = require("../model/user");
+const Order = require("../model/order");
 
 // Dashboard
 exports.getDashboard = async (req, res) => {
-  const productCount = await Product.countDocuments();
-  const userCount = await User.countDocuments();
-  res.render("admin/dashboard", { productCount, userCount });
+  try {
+    const orders = await Order
+      .find()
+      .sort({ placedAt: -1 })
+      .populate("user", "first_name last_name");
+      console.log(JSON.stringify(orders, null, 2));
+
+
+    res.render("admin/dashboard", {
+      orders,
+    });
+  } catch (err) {
+    console.error("error rendering orders for dashboard :", err);
+    res.status(500).json({message:"Unable to load dashboard"});
+  }
+  // const productCount = await Product.countDocuments();
+  // const userCount = await User.countDocuments();
 };
 
 //Menu
